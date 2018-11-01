@@ -58,13 +58,13 @@ def get_aspect(ax=None):
     return aspect        
 
 
-# In[18]:
+# In[23]:
 
 
-np.random.seed(2025)
+np.random.seed(2020)
 
 
-# In[19]:
+# In[24]:
 
 
 #setup a reference fold
@@ -109,14 +109,14 @@ print fourierseries.wavelengths
 print len(a[a==-1]), len(a)
 
 
-# In[20]:
+# In[25]:
 
 
 plt.plot(xx1,yy1,'ro')
 #plt.plot(x,foldrot[xb],'bo')
 
 
-# In[21]:
+# In[26]:
 
 
 fourierseries = bayesian_fourier_series_model(xx1,yy1,1)
@@ -171,7 +171,7 @@ fourierseries_corrected.run_sampler(10000,5000)
 #pymc.Matplot.geweke_plot(pymc.geweke(fourierseries.S.trace('c_0')[:,]))
 
 
-# In[22]:
+# In[27]:
 
 
 fig = bayesian_fourier_series_figure(fourierseries)

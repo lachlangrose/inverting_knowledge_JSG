@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[5]:
 
 
 import matplotlib.pylab as plt
@@ -22,20 +22,20 @@ get_ipython().magic('autoreload 2')
 get_ipython().magic('matplotlib inline')
 
 
-# In[2]:
+# In[6]:
 
 
 import pymc as pymc
 
 
-# In[13]:
+# In[7]:
 
 
 from bayesian_fourier_series import *
 mpl.rcParams.update({'font.size': 18})
 
 
-# In[22]:
+# In[8]:
 
 
 def plot_model(model,jj,ii):
@@ -99,7 +99,7 @@ def plot_model(model,jj,ii):
      #   ax[jj][2].axhline(-fourierseries.interlimb_likelihoods[0]/2,linestyle='dashed')
 
 
-# In[14]:
+# In[9]:
 
 
 wl1= 15.#15.
@@ -116,11 +116,11 @@ np.random.shuffle(x)
 
 
 
-# In[15]:
+# In[12]:
 
 
 mixture = True
-N = 25
+N = 40
 x = x[:N]
 fold= (foldfourier2.pos(x_))+foldfourier.pos(x_)
 foldpts = (foldfourier2.pos(x))+foldfourier.pos(x)
@@ -148,14 +148,14 @@ for i in range(1):
 #print fourierseries.wavelengths
 
 
-# In[16]:
+# In[13]:
 
 
 plt.plot(x,foldpts,'bo')
 plt.plot(x_,fold)
 
 
-# In[17]:
+# In[14]:
 
 
 fourierseries = bayesian_fourier_series_model(xx1,yy1,2)
@@ -210,7 +210,7 @@ fourierseries_corrected.run_sampler(10000,5000)
 #pymc.Matplot.geweke_plot(pymc.geweke(fourierseries.S.trace('c_0')[:,]))
 
 
-# In[18]:
+# In[15]:
 
 
 fig = bayesian_fourier_series_figure(fourierseries)
@@ -261,20 +261,7 @@ colours = ['b-','r-']
 #for i in range(len(fig.fourier_series_model.wavelengths)):
 temp = fig.ax[0][0]
 i = 0
-#temp = fig.plot_kde('c_%i'%(i),1,2,'c_%i'%i,colours[i])s" available and you have to piss before a ride you can use one while in your car and it's very discreet and convenient.
-    #except:
-    #    print "fail"
-    #if i == 0:
-    #    temp = fig.plot_normal_pdf(1,2,fig.fourier_series_model.wavelengths[i],\
-    #                    fig.fourier_series_model.wavelengths[i]/3.,\
-    #                    'prior_wavelength_%i'%i, colours[i]+'-')
-    #else:
-    #    fig.plot_normal_pdf2(temp,fig.fourier_series_model.wavelengths[i],\
-    #                    fig.fourier_series_model.wavelengths[i]/3.,\
-    #                    'prior_wavelength_%i'%i, colours[i]+'-')
-    # print fig.fourier_series_model.map.qw[i].value
-    #temp.legend(loc=i)
-    #fig.plot
+
 arrays = []
 pos = []
 labels = []
@@ -304,7 +291,7 @@ fig.ax[1][2].spines['left'].set_visible(False)
 fig.ax[1][2].tick_params(top='off', bottom='on', left='off', right='off', labelleft='on', labelbottom='on')
 
 
-# In[25]:
+# In[17]:
 
 
 fig = bayesian_fourier_series_figure(fourierseries_corrected)
@@ -355,25 +342,12 @@ colours = ['b-','r-']
 #for i in range(len(fig.fourier_series_model.wavelengths)):
 temp = fig.ax[0][0]
 i = 0
-#temp = fig.plot_kde('c_%i'%(i),1,2,'c_%i'%i,colours[i])s" available and you have to piss before a ride you can use one while in your car and it's very discreet and convenient.
-    #except:
-    #    print "fail"
-    #if i == 0:
-    #    temp = fig.plot_normal_pdf(1,2,fig.fourier_series_model.wavelengths[i],\
-    #                    fig.fourier_series_model.wavelengths[i]/3.,\
-    #                    'prior_wavelength_%i'%i, colours[i]+'-')
-    #else:
-    #    fig.plot_normal_pdf2(temp,fig.fourier_series_model.wavelengths[i],\
-    #                    fig.fourier_series_model.wavelengths[i]/3.,\
-    #                    'prior_wavelength_%i'%i, colours[i]+'-')
-    # print fig.fourier_series_model.map.qw[i].value
-    #temp.legend(loc=i)
-    #fig.plot
+
 arrays = []
 pos = []
 labels = []
 c = len(fourierseries_corrected.wavelengths)
-for i in range(len(fourierseries.wavelengths)):
+for i in range(len(fourierseries_corrected.wavelengths)):
     arrays.append(np.random.normal(fourierseries_corrected.wavelengths[i],fourierseries_corrected.wavelengths[i]/3.,1000))
     labels.append(r"$\lambda$ prior")
     pos.append(c)
@@ -389,7 +363,7 @@ for i in range(2):
     for j in range(2):
         fig.ax[i][j].set_xlim(0,300)
 fig.ax[0][0].set_ylim(-500,500)
-fig.ax[1][0].set_ylim(-500,500)
+#fig.ax[1][0].set_ylim(-500,500)
 
 fig.ax[1][2].spines['top'].set_visible(False)
 fig.ax[1][2].spines['right'].set_visible(False)
